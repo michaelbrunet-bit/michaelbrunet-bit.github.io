@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Michael Brunet — AI Engineering, B2B Microservices, Browser Forensics &amp; Retro Simulations</title>
+  <meta name="description" content="Production Python/FastAPI B2B microservices, Hybrid FAISS RAG libraries, Stealth Job Fit & Ghost-Job Forensics Chrome Extension, and the open-source 1983 WarGames W.O.P.R. Vector Simulator." />
+  <style>
+    :root {
+      --bg: #070b14;
+      --card: #0f172a;
+      --border: #1e293b;
+      --cyan: #38f8ff;
+      --indigo: #6366f1;
+      --emerald: #10b981;
+      --amber: #f59e0b;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+      background: radial-gradient(circle at top, #0f1b33 0%, var(--bg) 60%);
+      color: var(--text);
+      line-height: 1.55;
+    }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 36px 20px 72px; }
+    header {
+      text-align: center;
+      padding: 36px 24px;
+      border: 1px solid rgba(56, 248, 255, 0.25);
+      border-radius: 18px;
+      background: linear-gradient(145deg, rgba(15,23,42,0.92), rgba(7,11,20,0.96));
+      box-shadow: 0 0 36px rgba(56, 248, 255, 0.08);
+      margin-bottom: 38px;
+    }
+    .eyebrow {
+      display: inline-block;
+      font-family: "Courier New", monospace;
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      color: var(--cyan);
+      background: rgba(56, 248, 255, 0.1);
+      border: 1px solid rgba(56, 248, 255, 0.35);
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+    h1 { font-size: 2.35rem; margin: 0 0 12px; letter-spacing: -0.5px; }
+    .hero-sub { max-width: 760px; margin: 0 auto 22px; color: var(--muted); font-size: 1.05rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 20px; border-radius: 10px; font-weight: 700; font-size: 14px;
+      text-decoration: none; transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-cyan { background: var(--cyan); color: #021017; box-shadow: 0 0 18px rgba(56,248,255,0.35); }
+    .btn-indigo { background: var(--indigo); color: #fff; box-shadow: 0 4px 16px rgba(99,102,241,0.35); }
+    .btn-emerald { background: var(--emerald); color: #031a12; }
+    .btn-outline { border: 1px solid #334155; color: var(--text); background: rgba(15,23,42,0.7); }
+    .section-title {
+      font-size: 1.45rem; margin: 38px 0 16px; display: flex; align-items: center; gap: 10px;
+      border-bottom: 1px solid var(--border); padding-bottom: 10px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card.featured {
+      border-color: rgba(56, 248, 255, 0.5);
+      box-shadow: 0 0 24px rgba(56, 248, 255, 0.08);
+    }
+    .badge-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .tag {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      padding: 3px 9px; border-radius: 6px; background: rgba(99,102,241,0.18); color: #a5b4fc;
+    }
+    .tag.free { background: rgba(56,248,255,0.15); color: var(--cyan); }
+    .tag.hot { background: rgba(245,158,11,0.2); color: #fcd34d; }
+    .price { font-size: 1.25rem; font-weight: 800; color: var(--emerald); }
+    .card h3 { margin: 4px 0 8px; font-size: 1.15rem; }
+    .card p { color: var(--muted); font-size: 0.92rem; margin: 0 0 16px; }
+    .bullets { margin: 0 0 18px; padding-left: 18px; color: #cbd5e1; font-size: 0.86rem; }
+    .bullets li { margin-bottom: 5px; }
+    footer { text-align: center; margin-top: 56px; color: var(--muted); font-size: 0.88rem; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="eyebrow">NORAD 1983 VECTOR SIMULATOR • 2026 AI MICROSERVICES • GHOST-JOB FORENSICS</div>
+      <h1>Michael Brunet — Software &amp; AI Engineering Studio</h1>
+      <p class="hero-sub">
+        Creator of the open-source <strong>1983 WarGames W.O.P.R. Vector Simulator</strong>, the <strong>Stealth Job Fit &amp; Ghost-Job Forensics Extension</strong> for Indeed &amp; LinkedIn, and production-verified <strong>Python / FastAPI &amp; Hybrid RAG Microservices</strong>.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-cyan" href="https://michaelbrunet-bit.github.io/GTW-1983-WOPR-Simulator/" target="_blank">🕹️ Play 1983 W.O.P.R. Simulator Live</a>
+        <a class="btn btn-indigo" href="https://brunetmike.gumroad.com/l/uckkb" target="_blank">🕵️ Get Ghost-Job Forensics Extension ($29)</a>
+        <a class="btn btn-emerald" href="https://brunetmike.gumroad.com" target="_blank">⚡ Browse All B2B APIs on Gumroad</a>
+        <a class="btn btn-outline" href="https://github.com/michaelbrunet-bit/GTW-1983-WOPR-Simulator" target="_blank">⭐ Star on GitHub</a>
+      </div>
+    </header>
+
+    <h2 class="section-title">🔥 Featured Releases &amp; Open-Source Simulators</h2>
+    <div class="grid">
+      <div class="card featured">
+        <div>
+          <div class="badge-row">
+            <span class="tag free">FREE OPEN-SOURCE (MIT)</span>
+            <span class="price">FREE</span>
+          </div>
+          <h3>W.O.P.R. // Global Thermonuclear War (1983 Vector Simulator)</h3>
+          <p>Authentic tribute to the 1983 <em>WarGames</em> film featuring pure hollow HP 1345A glowing cyan vector continents on pitch-black #000000 CRT and procedural 300-baud Bell 103 modem audio.</p>
+          <ul class="bullets">
+            <li><strong>🎬 1983 Movie Mode:</strong> IMSAI 8080 dial-in → Joshua → Las Vegas &amp; Seattle → CPE 1704 TKS → 0-Player Tic-Tac-Toe</li>
+            <li><strong>⚔️ Play The Game (Wargamer Mode):</strong> Command 24 Triad units (ICBM silos, stealth SSBNs, B-52/Tu-95 wings, ABMs) and win via C3I Decapitation</li>
+          </ul>
+        </div>
+        <div style="display:flex; gap:8px;">
+          <a class="btn btn-cyan" style="flex:1; justify-content:center;" href="https://michaelbrunet-bit.github.io/GTW-1983-WOPR-Simulator/" target="_blank">▶ Play in Browser</a>
+          <a class="btn btn-outline" style="flex:1; justify-content:center;" href="https://github.com/michaelbrunet-bit/GTW-1983-WOPR-Simulator" target="_blank">GitHub Repo</a>
+        </div>
+      </div>
+
+      <div class="card featured">
+        <div>
+          <div class="badge-row">
+            <span class="tag hot">CHROME &amp; EDGE EXTENSION (v2.2.0)</span>
+            <span class="price">$29</span>
+          </div>
+          <h3>Stealth Job Fit &amp; Ghost-Job Forensics (Indeed &amp; LinkedIn)</h3>
+          <p>Stop wasting hours applying to stale, evergreen, or fake ghost job listings. Runs instant Ghost-Job Forensics &amp; Fit scoring directly on Indeed.com and LinkedIn.com.</p>
+          <ul class="bullets">
+            <li>Injects live on-card <strong>VERIFIED ACTIVE vs. HIGH GHOST RISK (0–100%)</strong> forensic badges</li>
+            <li>Evaluates requisition age, repost patterns, salary band disclosure &amp; talent-pool heuristics</li>
+            <li>Built-in anti-detect fingerprint &amp; WebRTC leak protection (<code>fingerprint.js</code>)</li>
+          </ul>
+        </div>
+        <a class="btn btn-indigo" style="justify-content:center;" href="https://brunetmike.gumroad.com/l/uckkb" target="_blank">Buy &amp; Download on Gumroad ($29) →</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <div class="badge-row">
+            <span class="tag">INDIE DECKBUILDER RPG</span>
+            <span class="price">$5</span>
+          </div>
+          <h3>Arcana Tactics: 78-Card Tarot Roguelike Deckbuilder</h3>
+          <p>Tactical 5x5 grid roguelike RPG featuring a complete 78-card Major &amp; Minor Arcana deck, Upright vs. Reversed card orientation mechanics, and elemental Suit synergies.</p>
+          <ul class="bullets">
+            <li>Upright &amp; Reversed tactical effects for every Major &amp; Minor Arcana card</li>
+            <li>Wands, Cups, Swords &amp; Pentacles elemental combos + Boss encounters</li>
+          </ul>
+        </div>
+        <a class="btn btn-outline" style="justify-content:center;" href="https://michaelbrunet-bit.itch.io/arcana-tactics" target="_blank">Play on Itch.io →</a>
+      </div>
+    </div>
+
+    <h2 class="section-title">⚡ Production Python / FastAPI &amp; 2026 Hybrid RAG Microservices</h2>
+    <div class="grid">
+      <div class="card">
+        <div>
+          <div class="badge-row"><span class="tag hot">2026 LLM + FAISS</span><span class="price">$49</span></div>
+          <h3>Coding Knowledge Hybrid RAG Library Premium</h3>
+          <p>Local-first FAISS + sentence-transformers RAG engine with built-in similarity threshold guardrails and 2026 model support (<code>gemini-2.5-flash</code>, <code>gpt-4.1-mini</code>, <code>qwen3-coder-30b</code>).</p>
+        </div>
+        <a class="btn btn-emerald" style="justify-content:center;" href="https://brunetmike.gumroad.com/l/rzuiln" target="_blank">Get RAG Library ($49) →</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <div class="badge-row"><span class="tag">FASTAPI MICROSERVICE</span><span class="price">$69</span></div>
+          <h3>Cross-Domain Sentiment &amp; Source Credibility API</h3>
+          <p>Production FastAPI service combining aspect-level sentiment analysis with source credibility weighting, manipulation detection, and confidence scoring.</p>
+        </div>
+        <a class="btn btn-emerald" style="justify-content:center;" href="https://brunetmike.gumroad.com/l/ugtvbv" target="_blank">Get Sentiment &amp; Credibility API ($69) →</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <div class="badge-row"><span class="tag">FASTAPI MICROSERVICE</span><span class="price">$59</span></div>
+          <h3>Contact Enrichment &amp; Multi-Source Skip-Tracing API</h3>
+          <p>High-speed B2B contact enrichment, phone/email normalization, entity resolution, and skip-tracing confidence scoring microservice with full pytest suite.</p>
+        </div>
+        <a class="btn btn-emerald" style="justify-content:center;" href="https://brunetmike.gumroad.com/l/qezac" target="_blank">Get Contact Enrichment API ($59) →</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <div class="badge-row"><span class="tag">FASTAPI MICROSERVICE</span><span class="price">$49</span></div>
+          <h3>Real Estate Motivated-Seller Lead Generator API</h3>
+          <p>Automated property data aggregation, equity/distress scoring, and motivated-seller lead filtering REST API with RapidAPI &amp; API-key middleware.</p>
+        </div>
+        <a class="btn btn-emerald" style="justify-content:center;" href="https://brunetmike.gumroad.com/l/uaewfq" target="_blank">Get Real Estate Leads API ($49) →</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <div class="badge-row"><span class="tag">FASTAPI MICROSERVICE</span><span class="price">$39</span></div>
+          <h3>Academic Papers Multi-Source Search API</h3>
+          <p>Unified REST API querying arXiv, PubMed, and Crossref with citation normalization, rate limiting, and structured JSON output for research pipelines.</p>
+        </div>
+        <a class="btn btn-emerald" style="justify-content:center;" href="https://brunetmike.gumroad.com/l/qjdudp" target="_blank">Get Academic Papers API ($39) →</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <div class="badge-row"><span class="tag">FASTAPI MICROSERVICE</span><span class="price">$29</span></div>
+          <h3>E-Commerce Multi-Retailer Price Monitor API</h3>
+          <p>Turnkey price-tracking, historical delta calculation, and webhook alert FastAPI template with Docker deployment and automated tests.</p>
+        </div>
+        <a class="btn btn-emerald" style="justify-content:center;" href="https://brunetmike.gumroad.com/l/wcsjlz" target="_blank">Get Price Monitor API ($29) →</a>
+      </div>
+    </div>
+
+    <footer>
+      © 2026 Michael Brunet (<a href="https://github.com/michaelbrunet-bit" style="color:var(--cyan);">@michaelbrunet-bit</a>) •
+      <a href="https://brunetmike.gumroad.com" style="color:var(--cyan);">Gumroad Storefront</a> •
+      <a href="https://michaelbrunet-bit.itch.io" style="color:var(--cyan);">Itch.io Studio</a>
+    </footer>
+  </div>
+</body>
+</html>
