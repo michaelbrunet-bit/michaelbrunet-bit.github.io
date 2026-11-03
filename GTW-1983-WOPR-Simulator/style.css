@@ -1,0 +1,841 @@
+/* ============================================================================
+ * W.O.P.R. // GLOBAL THERMONUCLEAR WAR (NORAD CHEYENNE MOUNTAIN 1983)
+ * Authentic P1 Cyan-Blue, P39 Green & P3 Amber Vector CRT Phosphor Stylesheet
+ * ============================================================================ */
+
+:root {
+    /* Default P1 / Tektronix / NORAD 1983 Cyan-Green Vector Phosphor */
+    --phosphor-main: #38f8ff;
+    --phosphor-bright: #d8ffff;
+    --phosphor-dim: #0d5661;
+    --phosphor-faint: rgba(56, 248, 255, 0.12);
+    --phosphor-glow: rgba(56, 248, 255, 0.55);
+    --bg-dark: #02060a;
+    --panel-bg: rgba(3, 12, 18, 0.92);
+    --panel-border: #157887;
+    --usa-color: #2ce8ff;
+    --ussr-color: #ff3b30;
+    --alert-red: #ff2a2a;
+    --alert-amber: #ffae00;
+    --alert-green: #00ff77;
+}
+
+body.theme-green {
+    /* P39 High-Persistence Green Vector Phosphor */
+    --phosphor-main: #00ff66;
+    --phosphor-bright: #ccffe0;
+    --phosphor-dim: #005522;
+    --phosphor-faint: rgba(0, 255, 102, 0.12);
+    --phosphor-glow: rgba(0, 255, 102, 0.55);
+    --bg-dark: #020804;
+    --panel-bg: rgba(3, 15, 8, 0.92);
+    --panel-border: #0e7a38;
+    --usa-color: #00ff88;
+    --ussr-color: #ff4422;
+}
+
+body.theme-amber {
+    /* P3 Amber Strategic Command CRT Phosphor */
+    --phosphor-main: #ffb000;
+    --phosphor-bright: #fff0c2;
+    --phosphor-dim: #664400;
+    --phosphor-faint: rgba(255, 176, 0, 0.12);
+    --phosphor-glow: rgba(255, 176, 0, 0.55);
+    --bg-dark: #090501;
+    --panel-bg: rgba(18, 10, 2, 0.92);
+    --panel-border: #8c5d00;
+    --usa-color: #ffcc33;
+    --ussr-color: #ff3b22;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg-dark);
+    color: var(--phosphor-main);
+    font-family: 'Courier New', 'Consolas', 'Lucida Console', monospace;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    text-shadow: 0 0 6px var(--phosphor-glow);
+    user-select: none;
+}
+
+/* CRT Curvature & Scanline Overlay */
+#crt-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 900;
+    background:
+        radial-gradient(circle at center, transparent 58%, rgba(0, 0, 0, 0.68) 100%),
+        repeating-linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.30) 0px,
+            rgba(0, 0, 0, 0.30) 1px,
+            transparent 1px,
+            transparent 3px
+        );
+    box-shadow: inset 0 0 45px rgba(0, 0, 0, 0.85);
+    transition: opacity 0.25s ease;
+}
+
+body.crt-curvature #app-shell {
+    transform: scale(0.992);
+    border-radius: 14px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.9), inset 0 0 24px var(--phosphor-faint);
+}
+
+body.crt-off #crt-overlay {
+    opacity: 0.08;
+}
+
+/* Full-Screen 1983 IMSAI 8080 CRT Terminal Mode */
+body.imsai-fullscreen #map-stage,
+body.imsai-fullscreen #defcon-tower-panel {
+    display: none !important;
+}
+body.imsai-fullscreen #terminal-panel {
+    width: 100% !important;
+    max-width: 100% !important;
+    border-right: none !important;
+    padding: 18px 48px !important;
+    background: #000000 !important;
+}
+body.imsai-fullscreen #content {
+    font-size: 18px !important;
+    line-height: 1.65 !important;
+    letter-spacing: 1.4px !important;
+    color: #98f5ff !important;
+    text-shadow: 0 0 10px rgba(80, 240, 255, 0.85) !important;
+}
+body.imsai-fullscreen #command-input,
+body.imsai-fullscreen #prompt {
+    font-size: 18px !important;
+    letter-spacing: 1.4px !important;
+}
+
+/* Screen Shake & EMP Glitch Animations */
+@keyframes crt-shake {
+    0% { transform: translate(0, 0); }
+    20% { transform: translate(-5px, 3px); }
+    40% { transform: translate(5px, -4px); }
+    60% { transform: translate(-4px, -2px); }
+    80% { transform: translate(4px, 3px); }
+    100% { transform: translate(0, 0); }
+}
+
+@keyframes crt-overload {
+    0% { filter: brightness(1) contrast(1); }
+    25% { filter: brightness(2.4) contrast(1.8) hue-rotate(15deg); }
+    50% { filter: brightness(0.6) contrast(2.2); }
+    75% { filter: brightness(2.8) contrast(1.6); }
+    100% { filter: brightness(1) contrast(1); }
+}
+
+body.screen-shake #app-shell {
+    animation: crt-shake 0.16s infinite;
+}
+
+body.screen-overload #app-shell {
+    animation: crt-overload 0.35s infinite;
+}
+
+#app-shell {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border: 1px solid var(--phosphor-dim);
+}
+
+/* ============================================================================
+ * TOP NORAD COMMAND HEADER
+ * ============================================================================ */
+#norad-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 14px;
+    border-bottom: 2px solid var(--phosphor-main);
+    background: var(--panel-bg);
+    z-index: 40;
+    gap: 12px;
+}
+
+.brand-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-title {
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: var(--phosphor-bright);
+}
+
+.brand-subtitle {
+    font-size: 10px;
+    letter-spacing: 1px;
+    opacity: 0.85;
+}
+
+/* CPE 1704 TKS Launch Code Tumbler Lock in Header / HUD */
+#cpe-tumbler-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 0, 0, 0.85);
+    border: 1px solid var(--phosphor-dim);
+    padding: 4px 10px;
+}
+
+#cpe-tumbler-box.active-lock {
+    border-color: var(--alert-red);
+    box-shadow: 0 0 14px rgba(255, 42, 42, 0.65);
+}
+
+.cpe-label {
+    font-size: 10px;
+    font-weight: bold;
+    color: var(--alert-amber);
+    letter-spacing: 1px;
+}
+
+#cpe-slots {
+    display: flex;
+    gap: 3px;
+}
+
+.cpe-slot {
+    width: 20px;
+    height: 24px;
+    border: 1px solid var(--phosphor-dim);
+    background: #020406;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--phosphor-dim);
+}
+
+.cpe-slot.spinning {
+    color: var(--alert-amber);
+    border-color: var(--alert-amber);
+    text-shadow: 0 0 8px var(--alert-amber);
+}
+
+.cpe-slot.locked {
+    color: #ffffff;
+    background: rgba(255, 30, 30, 0.35);
+    border-color: var(--alert-red);
+    text-shadow: 0 0 10px var(--alert-red);
+}
+
+.cpe-space {
+    width: 6px;
+}
+
+/* Header Controls */
+.header-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+}
+
+.crt-btn {
+    background: rgba(0, 0, 0, 0.65);
+    color: var(--phosphor-main);
+    border: 1px solid var(--phosphor-main);
+    padding: 4px 9px;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    text-shadow: 0 0 4px var(--phosphor-glow);
+    transition: all 0.12s ease;
+}
+
+.crt-btn:hover, .crt-btn.active {
+    background: var(--phosphor-main);
+    color: #000000;
+    box-shadow: 0 0 12px var(--phosphor-glow);
+    text-shadow: none;
+}
+
+.crt-btn.btn-danger {
+    border-color: var(--alert-red);
+    color: var(--alert-red);
+    text-shadow: 0 0 5px rgba(255, 42, 42, 0.6);
+}
+
+.crt-btn.btn-danger:hover, .crt-btn.btn-danger.active {
+    background: var(--alert-red);
+    color: #000;
+    box-shadow: 0 0 14px var(--alert-red);
+}
+
+.crt-btn.btn-amber {
+    border-color: var(--alert-amber);
+    color: var(--alert-amber);
+    text-shadow: 0 0 5px rgba(255, 174, 0, 0.6);
+}
+
+.crt-btn.btn-amber:hover, .crt-btn.btn-amber.active {
+    background: var(--alert-amber);
+    color: #000;
+    box-shadow: 0 0 14px var(--alert-amber);
+}
+
+/* ============================================================================
+ * MAIN WORKSPACE LAYOUT (3 COLUMNS: JOSHUA TERMINAL | BIG BOARD | DEFCON TOWER)
+ * ============================================================================ */
+#workspace {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 390px 1fr 112px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* ============================================================================
+ * LEFT PANEL: IMSAI 8080 / JOSHUA TERMINAL & STRATEGIC TRIAD COMMAND
+ * ============================================================================ */
+#terminal-panel {
+    background: var(--panel-bg);
+    border-right: 1px solid var(--panel-border);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 25;
+}
+
+.panel-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--panel-border);
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.panel-tab {
+    flex: 1;
+    padding: 6px 4px;
+    text-align: center;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    border-right: 1px solid var(--phosphor-dim);
+    background: transparent;
+    color: var(--phosphor-main);
+    font-family: inherit;
+    opacity: 0.65;
+}
+
+.panel-tab:last-child {
+    border-right: none;
+}
+
+.panel-tab.active {
+    opacity: 1;
+    background: var(--phosphor-faint);
+    color: var(--phosphor-bright);
+    box-shadow: inset 0 -2px 0 var(--phosphor-main);
+}
+
+/* Sub-views in Left Panel */
+.left-subview {
+    display: none;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+    padding: 10px;
+}
+
+.left-subview.active {
+    display: flex;
+}
+
+/* IMSAI 8080 Modem Status Strip */
+#modem-strip {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 8px;
+    margin-bottom: 8px;
+    border: 1px solid var(--phosphor-dim);
+    background: rgba(0, 0, 0, 0.7);
+    font-size: 11px;
+}
+
+.led-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #00ff66;
+    box-shadow: 0 0 6px #00ff66;
+    margin-right: 5px;
+}
+
+.led-dot.red {
+    background: #ff2a2a;
+    box-shadow: 0 0 6px #ff2a2a;
+}
+
+/* Terminal Output Log */
+#content {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 4px;
+    font-size: 12.5px;
+    line-height: 1.42;
+    font-family: 'Courier New', monospace;
+}
+
+#content::-webkit-scrollbar {
+    width: 5px;
+}
+#content::-webkit-scrollbar-thumb {
+    background: var(--phosphor-dim);
+}
+
+.log-entry { margin-bottom: 5px; word-break: break-word; white-space: pre-wrap; }
+.log-joshua { color: var(--phosphor-bright); font-weight: bold; }
+.log-system { color: var(--usa-color); }
+.log-warning { color: var(--alert-amber); }
+.log-error { color: var(--alert-red); font-weight: bold; }
+.log-success { color: var(--alert-green); font-weight: bold; }
+.log-dim { opacity: 0.7; font-size: 11.5px; }
+
+/* Quick Command Prompts */
+#quick-commands {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 7px 0;
+    border-top: 1px dashed var(--phosphor-dim);
+}
+
+#quick-commands .crt-btn {
+    font-size: 10px;
+    padding: 3px 6px;
+}
+
+/* Terminal Input Bar */
+#input-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--phosphor-main);
+    background: rgba(0, 0, 0, 0.85);
+    padding: 6px 8px;
+}
+
+#prompt {
+    color: var(--phosphor-bright);
+    margin-right: 6px;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+#command-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--phosphor-bright);
+    font-family: inherit;
+    font-size: 13px;
+    flex: 1;
+    text-shadow: 0 0 5px var(--phosphor-glow);
+}
+
+/* Triad Order of Battle & War Plan Subview */
+.section-header {
+    font-size: 11px;
+    font-weight: bold;
+    color: var(--alert-amber);
+    border-bottom: 1px solid var(--phosphor-dim);
+    padding-bottom: 3px;
+    margin: 6px 0 5px 0;
+    letter-spacing: 1px;
+}
+
+.selector-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    margin-bottom: 6px;
+}
+
+.scenario-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 6px;
+}
+
+.scenario-btn {
+    text-align: left;
+    padding: 5px 7px;
+    font-size: 10.5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#triad-roster {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-right: 3px;
+}
+
+.unit-card {
+    border: 1px solid var(--phosphor-dim);
+    background: rgba(0, 0, 0, 0.65);
+    padding: 5px 7px;
+    font-size: 11px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.12s ease;
+}
+
+.unit-card:hover, .unit-card.selected {
+    border-color: var(--phosphor-bright);
+    background: var(--phosphor-faint);
+    box-shadow: 0 0 8px var(--phosphor-glow);
+}
+
+.unit-card.destroyed {
+    opacity: 0.38;
+    border-color: #441111;
+    color: #ff4444;
+    cursor: not-allowed;
+    text-decoration: line-through;
+}
+
+.unit-meta {
+    font-size: 9.5px;
+    opacity: 0.8;
+}
+
+/* War-Dialer Subview */
+.wardial-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    overflow-y: auto;
+    margin-top: 6px;
+}
+
+.wardial-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 8px;
+    border: 1px solid var(--phosphor-dim);
+    background: rgba(0, 0, 0, 0.6);
+    font-size: 11.5px;
+    cursor: pointer;
+}
+
+.wardial-row:hover {
+    border-color: var(--phosphor-main);
+    background: var(--phosphor-faint);
+}
+
+.wardial-row.carrier-hit {
+    border-color: var(--alert-green);
+    color: var(--alert-green);
+    font-weight: bold;
+}
+
+/* ============================================================================
+ * CENTER STAGE: NORAD CHEYENNE MOUNTAIN VECTOR WORLD MAP ("THE BIG BOARD")
+ * ============================================================================ */
+#map-stage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #010407;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Top Tactical Doctrine & Target Filter Bar over Map */
+#map-top-bar {
+    position: absolute;
+    top: 8px;
+    left: 10px;
+    right: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    z-index: 25;
+    pointer-events: none;
+}
+
+.map-bar-group {
+    display: flex;
+    gap: 5px;
+    pointer-events: auto;
+    background: rgba(2, 10, 16, 0.85);
+    padding: 4px 6px;
+    border: 1px solid var(--phosphor-dim);
+}
+
+#targeting-hint {
+    font-size: 11px;
+    color: var(--alert-amber);
+    background: rgba(0, 0, 0, 0.85);
+    border: 1px solid var(--alert-amber);
+    padding: 4px 10px;
+    pointer-events: auto;
+}
+
+#war-canvas {
+    width: 100%;
+    flex: 1;
+    display: block;
+    cursor: crosshair;
+}
+
+/* Live NORAD Battle Damage Assessment (BDA) Ticker at Bottom of Map */
+#bda-ticker {
+    background: var(--panel-bg);
+    border-top: 2px solid var(--panel-border);
+    padding: 6px 12px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 220px;
+    gap: 10px;
+    z-index: 25;
+    font-size: 11px;
+}
+
+.bda-faction {
+    border: 1px solid var(--phosphor-dim);
+    background: rgba(0, 0, 0, 0.65);
+    padding: 5px 9px;
+}
+
+.bda-faction-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 12px;
+    margin-bottom: 3px;
+}
+
+.bda-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    font-size: 10.5px;
+}
+
+.bda-global {
+    border: 1px solid var(--alert-amber);
+    background: rgba(20, 10, 0, 0.7);
+    padding: 5px 9px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+}
+
+/* ============================================================================
+ * RIGHT COLUMN: NORAD DEFCON STATUS INDICATOR TOWER & SYSTEM TELEMETRY
+ * ============================================================================ */
+#defcon-tower-panel {
+    background: var(--panel-bg);
+    border-left: 1px solid var(--panel-border);
+    display: flex;
+    flex-direction: column;
+    padding: 8px 6px;
+    gap: 6px;
+    z-index: 25;
+}
+
+.tower-title {
+    text-align: center;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    color: var(--phosphor-bright);
+    border-bottom: 1px solid var(--phosphor-dim);
+    padding-bottom: 4px;
+}
+
+#defcon-tower {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+}
+
+.defcon-lamp {
+    flex: 1;
+    border: 2px solid #222;
+    background: rgba(5, 5, 5, 0.85);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    opacity: 0.25;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.defcon-lamp .dc-num {
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.defcon-lamp .dc-sub {
+    font-size: 8.5px;
+    margin-top: 2px;
+    opacity: 0.9;
+}
+
+.defcon-lamp.active {
+    opacity: 1;
+    border-color: currentColor;
+    box-shadow: 0 0 18px currentColor, inset 0 0 10px currentColor;
+}
+
+#defcon-1 { color: #ff1e1e; }
+#defcon-1.active { animation: pulse-defcon1 0.55s infinite alternate; }
+#defcon-2 { color: #ff7b00; }
+#defcon-3 { color: #ffe600; }
+#defcon-4 { color: #00d9ff; }
+#defcon-5 { color: #00ff66; }
+
+@keyframes pulse-defcon1 {
+    from { box-shadow: 0 0 10px #ff1e1e, inset 0 0 6px #ff1e1e; background: rgba(60, 0, 0, 0.7); }
+    to { box-shadow: 0 0 28px #ff1e1e, inset 0 0 18px #ff5555; background: rgba(140, 0, 0, 0.9); }
+}
+
+.tower-telemetry {
+    border-top: 1px solid var(--phosphor-dim);
+    padding-top: 6px;
+    font-size: 9.5px;
+    line-height: 1.45;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+/* ============================================================================
+ * OVERLAYS: TIC-TAC-TOE (0-PLAYER FINALE) & DR. FALKEN'S CHESS
+ * ============================================================================ */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(1, 5, 9, 0.88);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 500;
+}
+
+.modal-overlay.open {
+    display: flex;
+}
+
+.vector-modal {
+    width: 660px;
+    max-width: 94vw;
+    background: #02080e;
+    border: 2px solid var(--phosphor-main);
+    box-shadow: 0 0 36px var(--phosphor-glow);
+    padding: 18px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.vector-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--phosphor-dim);
+    padding-bottom: 8px;
+}
+
+.vector-modal-header h2 {
+    font-size: 16px;
+    letter-spacing: 2px;
+    color: var(--phosphor-bright);
+}
+
+#ttt-layout {
+    display: grid;
+    grid-template-columns: 230px 1fr;
+    gap: 16px;
+    align-items: center;
+}
+
+#ttt-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 70px);
+    grid-template-rows: repeat(3, 70px);
+    gap: 4px;
+    justify-content: center;
+}
+
+.ttt-cell {
+    border: 2px solid var(--phosphor-main);
+    background: rgba(0, 20, 30, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    font-weight: bold;
+    color: var(--phosphor-bright);
+    cursor: pointer;
+    text-shadow: 0 0 12px var(--phosphor-glow);
+}
+
+.ttt-cell:hover {
+    background: var(--phosphor-faint);
+}
+
+#ttt-scenario-feed {
+    height: 180px;
+    overflow-y: auto;
+    border: 1px solid var(--phosphor-dim);
+    background: #010306;
+    padding: 8px;
+    font-size: 11.5px;
+    line-height: 1.4;
+}
+
+#joshua-realization-box {
+    border: 1px solid var(--alert-green);
+    background: rgba(0, 30, 15, 0.75);
+    padding: 10px 14px;
+    min-height: 76px;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1.55;
+    color: var(--phosphor-bright);
+    letter-spacing: 1px;
+}

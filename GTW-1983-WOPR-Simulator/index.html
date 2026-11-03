@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W.O.P.R. // GLOBAL THERMONUCLEAR WAR (NORAD 1983)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="crt-curvature">
+    <div id="crt-overlay"></div>
+
+    <div id="app-shell">
+        <!-- ==================================================================
+             TOP NORAD CHEYENNE MOUNTAIN COMMAND HEADER & CPE 1704 TKS LOCK
+             ================================================================== -->
+        <header id="norad-header">
+            <div class="brand-block">
+                <div class="brand-title">NORAD // W.O.P.R. STRATEGIC SIMULATOR</div>
+                <div class="brand-subtitle">WAR OPERATION PLAN RESPONSE • CHEYENNE MOUNTAIN COMPLEX • SYS-1983.06.03</div>
+            </div>
+
+            <!-- DUAL GAMEPLAY MODE SELECTOR: 1983 MOVIE MODE vs PLAY THE GAME (WARGAMER) -->
+            <div id="mode-selector-box" style="display:flex; gap:6px; align-items:center;">
+                <button class="crt-btn active" id="btn-mode-movie" onclick="WoprGame.setGameMode('MOVIE')" title="Authentic 1983 WarGames Film Sequence (IMSAI 8080 -> Joshua -> Las Vegas/Seattle -> CPE 1704 TKS -> 0-Player Tic-Tac-Toe)">🎬 1983 MOVIE MODE</button>
+                <button class="crt-btn btn-amber" id="btn-mode-wargame" onclick="WoprGame.setGameMode('WARGAME')" title="Play Global Thermonuclear War to Win (Full Strategic Triad Combat, No Forced Cutscene)">⚔️ PLAY THE GAME (WARGAMER)</button>
+                <button class="crt-btn" id="btn-imsai-fullscreen" onclick="WoprGame.toggleImsaiFullscreen()" title="Toggle Full-Screen 1983 IMSAI 8080 CRT Terminal">🖥️ IMSAI 8080 CRT</button>
+            </div>
+
+            <!-- Iconic WOPR Launch Code Tumbler Lock: CPE 1704 TKS -->
+            <div id="cpe-tumbler-box" title="WOPR Autonomous Launch Code Decryption Tumbler">
+                <span class="cpe-label" id="cpe-status-label">LAUNCH CODE LOCK:</span>
+                <div id="cpe-slots" aria-label="CPE 1704 TKS Launch Code Tumbler">
+                    <div class="cpe-slot" id="cpe-0">-</div>
+                    <div class="cpe-slot" id="cpe-1">-</div>
+                    <div class="cpe-slot" id="cpe-2">-</div>
+                    <div class="cpe-space"></div>
+                    <div class="cpe-slot" id="cpe-3">-</div>
+                    <div class="cpe-slot" id="cpe-4">-</div>
+                    <div class="cpe-slot" id="cpe-5">-</div>
+                    <div class="cpe-slot" id="cpe-6">-</div>
+                    <div class="cpe-space"></div>
+                    <div class="cpe-slot" id="cpe-7">-</div>
+                    <div class="cpe-slot" id="cpe-8">-</div>
+                    <div class="cpe-slot" id="cpe-9">-</div>
+                </div>
+            </div>
+
+            <div class="header-controls">
+                <button class="crt-btn" id="btn-projection" onclick="WoprGame.toggleProjection()">MAP: MERCATOR</button>
+                <button class="crt-btn" id="btn-theme" onclick="WoprGame.cycleTheme()">CRT: P1 CYAN</button>
+                <button class="crt-btn active" id="btn-crt-fx" onclick="WoprGame.toggleCrtFx()">SCANLINES: ON</button>
+                <button class="crt-btn active" id="btn-audio" onclick="WoprGame.toggleAudio()">AUDIO: ON</button>
+                <button class="crt-btn btn-danger" id="btn-cpe-lock" onclick="WoprGame.startCpeTumblerSequence()">CPE 1704 TKS</button>
+                <button class="crt-btn btn-amber" id="btn-ttt-override" onclick="WoprGame.openTicTacToeModal()">TIC-TAC-TOE (0P)</button>
+                <a class="crt-btn" href="https://brunetmike.gumroad.com" target="_blank" rel="noopener" style="text-decoration:none;">⚡ DEV TOOLS &amp; APIs</a>
+            </div>
+        </header>
+
+        <!-- ==================================================================
+             MAIN 3-COLUMN NORAD WORKSPACE
+             ================================================================== -->
+        <main id="workspace">
+            <!-- LEFT PANEL: IMSAI 8080 / JOSHUA TERMINAL & TRIAD COMMAND -->
+            <section id="terminal-panel">
+                <div class="panel-tabs">
+                    <button class="panel-tab active" id="tab-btn-terminal" onclick="WoprGame.switchLeftTab('terminal')">1. JOSHUA TERMINAL</button>
+                    <button class="panel-tab" id="tab-btn-triad" onclick="WoprGame.switchLeftTab('triad')">2. TRIAD &amp; PLANS</button>
+                    <button class="panel-tab" id="tab-btn-wardial" onclick="WoprGame.switchLeftTab('wardial')">3. IMSAI DIALER</button>
+                </div>
+
+                <!-- TAB 1: JOSHUA TERMINAL (LOGON: & DIALOGUE) -->
+                <div class="left-subview active" id="subview-terminal">
+                    <div id="modem-strip">
+                        <span><span class="led-dot" id="modem-led"></span>IMSAI 8080 • BELL 103 (300 BAUD)</span>
+                        <span id="modem-carrier-text">CARRIER: 311-555-4855</span>
+                    </div>
+
+                    <div id="content" aria-live="polite"></div>
+
+                    <div id="quick-commands">
+                        <button class="crt-btn btn-amber" onclick="WoprGame.playNextMovieStep()">▶ NEXT 1983 MOVIE SCENE</button>
+                        <button class="crt-btn" onclick="WoprGame.dialSunnyvale('311-555-4855')">DIAL 311-555-4855</button>
+                        <button class="crt-btn" onclick="WoprGame.runQuickCmd('JOSHUA')">LOGON: JOSHUA</button>
+                        <button class="crt-btn" onclick="WoprGame.runQuickCmd('HELP GAMES')">HELP GAMES</button>
+                        <button class="crt-btn" onclick="WoprGame.runQuickCmd('LIST GAMES')">LIST GAMES</button>
+                        <button class="crt-btn btn-amber" onclick="WoprGame.runQuickCmd('GLOBAL THERMONUCLEAR WAR')">PLAY GTW</button>
+                        <button class="crt-btn" onclick="WoprGame.runQuickCmd('LAS VEGAS, SEATTLE')">TARGET: LAS VEGAS &amp; SEATTLE</button>
+                        <button class="crt-btn" onclick="WoprGame.runQuickCmd('CHESS')">CHESS</button>
+                        <button class="crt-btn btn-danger" onclick="WoprGame.openTicTacToeModal(true)">0-PLAYER TIC-TAC-TOE</button>
+                        <button class="crt-btn" onclick="WoprGame.runQuickCmd('RESET')">RESET</button>
+                    </div>
+
+                    <div id="input-container">
+                        <span id="prompt">LOGON:&gt;</span>
+                        <input type="text" id="command-input" placeholder="TYPE JOSHUA, LIST GAMES, GTW, CHESS..." autocomplete="off" autofocus>
+                    </div>
+                </div>
+
+                <!-- TAB 2: SIDE SELECTION, 1983 WAR PLANS & STRATEGIC TRIAD ROSTER -->
+                <div class="left-subview" id="subview-triad">
+                    <div class="section-header">WHICH SIDE DO YOU WANT?</div>
+                    <div class="selector-row">
+                        <button class="crt-btn active" id="side-btn-USA" onclick="WoprGame.selectSide('USA')">1. UNITED STATES</button>
+                        <button class="crt-btn" id="side-btn-USSR" onclick="WoprGame.selectSide('USSR')">2. SOVIET UNION</button>
+                    </div>
+
+                    <div class="section-header">1983 STRATEGIC WAR PLAN / SCENARIO</div>
+                    <div class="scenario-list">
+                        <button class="crt-btn scenario-btn active" id="scen-SIOP62" onclick="WoprGame.loadScenario('SIOP62')">
+                            <span>SIOP-62 FULL RETALIATION</span><span>[DEFCON 4]</span>
+                        </button>
+                        <button class="crt-btn scenario-btn" id="scen-GIUK" onclick="WoprGame.loadScenario('GIUK')">
+                            <span>NORTH ATLANTIC / GIUK GAP ESCALATION</span><span>[DEFCON 3]</span>
+                        </button>
+                        <button class="crt-btn scenario-btn" id="scen-DECAP" onclick="WoprGame.loadScenario('DECAP')">
+                            <span>FIRST STRIKE DECAPITATION</span><span>[DEFCON 2]</span>
+                        </button>
+                        <button class="crt-btn scenario-btn btn-danger" id="scen-TOTAL" onclick="WoprGame.loadScenario('TOTAL')">
+                            <span>DEFCON 1 TOTAL EXCHANGE</span><span>[DEFCON 1]</span>
+                        </button>
+                    </div>
+
+                    <div class="section-header">STRATEGIC TRIAD ORDER OF BATTLE (CLICK TO ARM)</div>
+                    <div id="triad-roster"></div>
+                </div>
+
+                <!-- TAB 3: IMSAI 8080 SUNNYVALE WAR-DIALER -->
+                <div class="left-subview" id="subview-wardial">
+                    <div class="section-header">IMSAI 8080 ACOUSTIC COUPLER WAR-DIALER</div>
+                    <p style="font-size:11px; line-height:1.4; margin-bottom:6px;">
+                        Scanning Sunnyvale, CA prefix <strong>(311) 555-xxxx</strong> for 300-baud Bell 103 modem carrier tones:
+                    </p>
+                    <div style="display:flex; gap:6px; margin-bottom:6px;">
+                        <button class="crt-btn btn-amber" onclick="WoprGame.startAutoWarDial()">AUTO-SCAN (311-555-4850..4859)</button>
+                        <button class="crt-btn" onclick="WoprGame.dialSunnyvale('311-555-4855')">DIAL WOPR (4855)</button>
+                    </div>
+                    <div class="wardial-grid" id="wardial-list"></div>
+                </div>
+            </section>
+
+            <!-- CENTER PANEL: NORAD CHEYENNE MOUNTAIN VECTOR WORLD MAP ("THE BIG BOARD") -->
+            <section id="map-stage">
+                <div id="map-top-bar">
+                    <div class="map-bar-group">
+                        <button class="crt-btn" onclick="WoprGame.executeDoctrine('COUNTERFORCE')" title="Strike Enemy ICBM Silos &amp; Radar Domes">COUNTERFORCE</button>
+                        <button class="crt-btn btn-amber" onclick="WoprGame.executeDoctrine('DECAPITATION')" title="Strike Enemy Command Bunkers (Cheyenne Mtn / Kremlin)">DECAPITATION</button>
+                        <button class="crt-btn btn-danger" onclick="WoprGame.executeDoctrine('COUNTERVALUE')" title="Strike Major Population Centers">COUNTERVALUE</button>
+                        <button class="crt-btn btn-danger" onclick="WoprGame.executeDoctrine('SIOP_SALVO')" title="Full Strategic Triad Launch (Silos + SSBNs + Bombers)">FULL SIOP SALVO</button>
+                    </div>
+
+                    <div id="targeting-hint">CLICK FRIENDLY SILO/SSBN/BOMBER THEN CLICK ENEMY TARGET</div>
+
+                    <div class="map-bar-group">
+                        <button class="crt-btn" onclick="WoprGame.fireAbmManual()">LAUNCH ABM</button>
+                        <button class="crt-btn active" id="btn-auto-abm" onclick="WoprGame.toggleAutoAbm()">AUTO-ABM: ON</button>
+                    </div>
+                </div>
+
+                <canvas id="war-canvas"></canvas>
+
+                <!-- LIVE NORAD BATTLE DAMAGE ASSESSMENT (BDA) TICKER -->
+                <footer id="bda-ticker">
+                    <div class="bda-faction" id="bda-USA">
+                        <div class="bda-faction-header" style="color:var(--usa-color);">
+                            <span>UNITED STATES (NORAD / SAC)</span>
+                            <span id="bda-usa-cmd">CMD AUTH: 100%</span>
+                        </div>
+                        <div class="bda-metrics">
+                            <span id="bda-usa-silos">SILOS: 4/4</span>
+                            <span id="bda-usa-ssbn">SSBNs: 3/3</span>
+                            <span id="bda-usa-bombers">BOMBERS: 3/3</span>
+                            <span id="bda-usa-abm">ABM STOCK: 10</span>
+                            <span id="bda-usa-radars">BMEWS: 3/3</span>
+                            <span id="bda-usa-cas" style="color:var(--alert-amber);">CASUALTIES: 0.0M</span>
+                        </div>
+                    </div>
+
+                    <div class="bda-faction" id="bda-USSR">
+                        <div class="bda-faction-header" style="color:var(--ussr-color);">
+                            <span>SOVIET UNION (PVO / GEN STAFF)</span>
+                            <span id="bda-ussr-cmd">CMD AUTH: 100%</span>
+                        </div>
+                        <div class="bda-metrics">
+                            <span id="bda-ussr-silos">SILOS: 4/4</span>
+                            <span id="bda-ussr-ssbn">SSBNs: 3/3</span>
+                            <span id="bda-ussr-bombers">BOMBERS: 3/3</span>
+                            <span id="bda-ussr-abm">ABM STOCK: 10</span>
+                            <span id="bda-ussr-radars">PECHORA: 1/1</span>
+                            <span id="bda-ussr-cas" style="color:var(--alert-amber);">CASUALTIES: 0.0M</span>
+                        </div>
+                    </div>
+
+                    <div class="bda-global">
+                        <div style="font-weight:bold; color:var(--alert-amber);">GLOBAL BDA TELEMETRY</div>
+                        <div id="bda-megatons">YIELD DETONATED: 0 MT</div>
+                        <div id="bda-in-flight">WARHEADS IN FLIGHT: 0</div>
+                        <div id="bda-fallout">FALLOUT PLUMES: 0</div>
+                    </div>
+                </footer>
+            </section>
+
+            <!-- RIGHT PANEL: ILLUMINATED DEFCON STATUS TOWER -->
+            <aside id="defcon-tower-panel" aria-label="DEFCON Status Tower">
+                <div class="tower-title">DEFCON</div>
+                <div id="defcon-tower">
+                    <div class="defcon-lamp" id="defcon-1">
+                        <span class="dc-num">DEFCON 1</span>
+                        <span class="dc-sub">COCKED PISTOL</span>
+                    </div>
+                    <div class="defcon-lamp" id="defcon-2">
+                        <span class="dc-num">DEFCON 2</span>
+                        <span class="dc-sub">FAST PACE</span>
+                    </div>
+                    <div class="defcon-lamp" id="defcon-3">
+                        <span class="dc-num">DEFCON 3</span>
+                        <span class="dc-sub">ROUND HOUSE</span>
+                    </div>
+                    <div class="defcon-lamp" id="defcon-4">
+                        <span class="dc-num">DEFCON 4</span>
+                        <span class="dc-sub">DOUBLE TAKE</span>
+                    </div>
+                    <div class="defcon-lamp active" id="defcon-5">
+                        <span class="dc-num">DEFCON 5</span>
+                        <span class="dc-sub">FADE OUT</span>
+                    </div>
+                </div>
+
+                <div class="tower-telemetry">
+                    <div style="color:var(--phosphor-bright); font-weight:bold;">EARLY WARNING</div>
+                    <div id="ew-thule">THULE: NOMINAL</div>
+                    <div id="ew-clear">CLEAR: NOMINAL</div>
+                    <div id="ew-fyling">FYLING: NOMINAL</div>
+                    <div id="ew-pechora">PECHORA: NOMINAL</div>
+                    <div id="ew-sat">DSP/OKO: TRACKING</div>
+                    <div id="ew-emp">EMP FLUX: 0.0%</div>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- ======================================================================
+         PHASE 3 MODAL: TIC-TAC-TOE (NUMBER OF PLAYERS: 0) OVERRIDE FINALE
+         ====================================================================== -->
+    <div class="modal-overlay" id="ttt-modal">
+        <div class="vector-modal">
+            <div class="vector-modal-header">
+                <h2>W.O.P.R. // TIC-TAC-TOE STRATEGIC EQUILIBRIUM MATRIX</h2>
+                <button class="crt-btn" onclick="WoprGame.closeTicTacToeModal()">RETURN TO BIG BOARD</button>
+            </div>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+                <span style="font-size:12px;">INTERRUPT CPE 1704 TKS LAUNCH SEQUENCE VIA GAME-THEORETIC DEADLOCK:</span>
+                <div style="display:flex; gap:6px;">
+                    <button class="crt-btn btn-danger" id="btn-ttt-0p" onclick="WoprGame.startZeroPlayerTicTacToe()">NUMBER OF PLAYERS: 0 (WOPR VS WOPR)</button>
+                    <button class="crt-btn" id="btn-ttt-1p" onclick="WoprGame.startOnePlayerTicTacToe()">NUMBER OF PLAYERS: 1 (HUMAN VS WOPR)</button>
+                </div>
+            </div>
+
+            <div id="ttt-layout">
+                <div>
+                    <div id="ttt-grid">
+                        <div class="ttt-cell" onclick="WoprGame.playTttCell(0)" id="ttt-c0"></div>
+                        <div class="ttt-cell" onclick="WoprGame.playTttCell(1)" id="ttt-c1"></div>
+                        <div class="ttt-cell" onclick="WoprGame.playTttCell(2)" id="ttt-c2"></div>
+                        <div class="ttt-cell" onclick="WoprGame.playTttCell(3)" id="ttt-c3"></div>
+                        <div class="ttt-cell" onclick="WoprGame.playTttCell(4)" id="ttt-c4"></div>
+                        <div class="ttt-cell" onclick="WoprGame.playTttCell(5)" id="ttt-c5"></div>
+                        <div class="ttt-cell" onclick="WoprGame.playTttCell(6)" id="ttt-c6"></div>
+                        <div class="ttt-cell" onclick="WoprGame.playTttCell(7)" id="ttt-c7"></div>
+                        <div class="ttt-cell" onclick="WoprGame.playTttCell(8)" id="ttt-c8"></div>
+                    </div>
+                    <div id="ttt-stats" style="text-align:center; font-size:11px; margin-top:8px; color:var(--alert-amber);">
+                        DRAWS: 0 | SPEED: 1.0x | WINNER: NONE
+                    </div>
+                </div>
+
+                <div>
+                    <div style="font-size:11px; font-weight:bold; margin-bottom:4px; color:var(--phosphor-bright);">
+                        WOPR GLOBAL NUCLEAR WAR PLAN EVALUATION STREAM:
+                    </div>
+                    <div id="ttt-scenario-feed"></div>
+                </div>
+            </div>
+
+            <div id="joshua-realization-box">
+                AWAITING ZERO-PLAYER RECURSIVE LEARNING MATRIX...
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
