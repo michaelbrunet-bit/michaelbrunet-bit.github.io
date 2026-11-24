@@ -3,43 +3,77 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Michael Brunet — AI Engineering, B2B Microservices, Browser Forensics &amp; Retro Simulations</title>
-  <meta name="description" content="Production Python/FastAPI B2B microservices, Hybrid FAISS RAG libraries, Stealth Job Fit & Ghost-Job Forensics Chrome Extension, and the open-source 1983 WarGames W.O.P.R. Vector Simulator." />
+  <title>Michael Brunet — Software Studio, Live Games, AI Microservices, Apify Feeds &amp; Books</title>
+  <meta name="description" content="Play Arcana Tactics &amp; 1983 W.O.P.R. Simulator live, explore 18 Apify B2B data extractors, verified Python/FastAPI microservices on Gumroad, and illustrated books." />
+  <link rel="canonical" href="https://michaelbrunet-bit.github.io/" />
+  <meta property="og:title" content="Michael Brunet — Software Studio, Live Games, AI Microservices, Apify Feeds &amp; Books" />
+  <meta property="og:description" content="Play Arcana Tactics &amp; 1983 W.O.P.R. Simulator live, explore 18 Apify B2B data extractors, verified Python/FastAPI microservices on Gumroad, and illustrated books." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://michaelbrunet-bit.github.io/" />
+  <meta property="og:image" content="https://michaelbrunet-bit.github.io/GTW-1983-WOPR-Simulator/cover_630x500.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Michael Brunet — Software Studio, Live Games, AI Microservices, Apify Feeds &amp; Books" />
+  <meta name="twitter:description" content="Play Arcana Tactics &amp; 1983 W.O.P.R. Simulator live, explore 18 Apify B2B data extractors, verified Python/FastAPI microservices on Gumroad, and illustrated books." />
   <style>
     :root {
       --bg: #070b14;
       --card: #0f172a;
+      --card-2: #111c33;
       --border: #1e293b;
       --cyan: #38f8ff;
       --indigo: #6366f1;
       --emerald: #10b981;
       --amber: #f59e0b;
+      --rose: #f43f5e;
       --text: #f8fafc;
       --muted: #94a3b8;
     }
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
-      background: radial-gradient(circle at top, #0f1b33 0%, var(--bg) 60%);
+      background: radial-gradient(circle at top, #0f1b33 0%, var(--bg) 58%);
       color: var(--text);
-      line-height: 1.55;
+      line-height: 1.6;
     }
-    .wrap { max-width: 1160px; margin: 0 auto; padding: 36px 20px 72px; }
-    header {
+    .topnav {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(7, 11, 20, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .topnav-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .brand { font-weight: 800; color: var(--cyan); text-decoration: none; font-size: 1rem; letter-spacing: 0.02em; }
+    .navlinks { display: flex; flex-wrap: wrap; gap: 16px; }
+    .navlinks a { color: #cbd5e1; text-decoration: none; font-size: 0.9rem; font-weight: 600; }
+    .navlinks a:hover { color: var(--cyan); }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 32px 20px 72px; }
+    header.hero {
       text-align: center;
-      padding: 36px 24px;
+      padding: 38px 24px;
       border: 1px solid rgba(56, 248, 255, 0.25);
       border-radius: 18px;
       background: linear-gradient(145deg, rgba(15,23,42,0.92), rgba(7,11,20,0.96));
       box-shadow: 0 0 36px rgba(56, 248, 255, 0.08);
-      margin-bottom: 38px;
+      margin-bottom: 36px;
     }
     .eyebrow {
       display: inline-block;
       font-family: "Courier New", monospace;
       font-size: 12px;
-      letter-spacing: 1.5px;
+      letter-spacing: 1.4px;
       color: var(--cyan);
       background: rgba(56, 248, 255, 0.1);
       border: 1px solid rgba(56, 248, 255, 0.35);
@@ -47,27 +81,37 @@
       border-radius: 999px;
       margin-bottom: 12px;
     }
-    h1 { font-size: 2.35rem; margin: 0 0 12px; letter-spacing: -0.5px; }
-    .hero-sub { max-width: 760px; margin: 0 auto 22px; color: var(--muted); font-size: 1.05rem; }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+    h1 { font-size: 2.25rem; margin: 0 0 12px; letter-spacing: -0.4px; line-height: 1.2; }
+    .hero-sub { max-width: 780px; margin: 0 auto 22px; color: var(--muted); font-size: 1.03rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
     .btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 11px 20px; border-radius: 10px; font-weight: 700; font-size: 14px;
-      text-decoration: none; transition: transform 0.15s, box-shadow 0.15s;
+      display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+      padding: 10px 18px; border-radius: 10px; font-weight: 700; font-size: 14px;
+      text-decoration: none; transition: transform 0.15s, box-shadow 0.15s; cursor: pointer;
     }
     .btn:hover { transform: translateY(-2px); }
-    .btn-cyan { background: var(--cyan); color: #021017; box-shadow: 0 0 18px rgba(56,248,255,0.35); }
-    .btn-indigo { background: var(--indigo); color: #fff; box-shadow: 0 4px 16px rgba(99,102,241,0.35); }
+    .btn-cyan { background: var(--cyan); color: #021017; box-shadow: 0 0 18px rgba(56,248,255,0.28); }
+    .btn-indigo { background: var(--indigo); color: #fff; box-shadow: 0 4px 16px rgba(99,102,241,0.3); }
     .btn-emerald { background: var(--emerald); color: #031a12; }
-    .btn-outline { border: 1px solid #334155; color: var(--text); background: rgba(15,23,42,0.7); }
+    .btn-amber { background: var(--amber); color: #1c1002; }
+    .btn-outline { border: 1px solid #334155; color: var(--text); background: rgba(15,23,42,0.75); }
     .section-title {
-      font-size: 1.45rem; margin: 38px 0 16px; display: flex; align-items: center; gap: 10px;
+      font-size: 1.45rem; margin: 44px 0 8px; display: flex; align-items: center; gap: 10px;
       border-bottom: 1px solid var(--border); padding-bottom: 10px;
     }
+    .section-lead { color: var(--muted); margin: 0 0 18px; font-size: 0.96rem; }
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
       gap: 20px;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(460px, 1fr));
+      gap: 22px;
+    }
+    @media (max-width: 560px) {
+      .grid-2 { grid-template-columns: 1fr; }
     }
     .card {
       background: var(--card);
@@ -77,159 +121,302 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      gap: 14px;
     }
     .card.featured {
-      border-color: rgba(56, 248, 255, 0.5);
-      box-shadow: 0 0 24px rgba(56, 248, 255, 0.08);
+      border-color: rgba(56, 248, 255, 0.45);
+      box-shadow: 0 0 24px rgba(56, 248, 255, 0.07);
     }
-    .badge-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .card.book-featured {
+      border-color: rgba(245, 158, 11, 0.45);
+      box-shadow: 0 0 24px rgba(245, 158, 11, 0.06);
+    }
+    .badge-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
     .tag {
       font-size: 11px; font-weight: 700; text-transform: uppercase;
       padding: 3px 9px; border-radius: 6px; background: rgba(99,102,241,0.18); color: #a5b4fc;
     }
     .tag.free { background: rgba(56,248,255,0.15); color: var(--cyan); }
     .tag.hot { background: rgba(245,158,11,0.2); color: #fcd34d; }
-    .price { font-size: 1.25rem; font-weight: 800; color: var(--emerald); }
-    .card h3 { margin: 4px 0 8px; font-size: 1.15rem; }
-    .card p { color: var(--muted); font-size: 0.92rem; margin: 0 0 16px; }
-    .bullets { margin: 0 0 18px; padding-left: 18px; color: #cbd5e1; font-size: 0.86rem; }
+    .tag.green { background: rgba(16,185,129,0.2); color: #6ee7b7; }
+    .price { font-size: 1.2rem; font-weight: 800; color: var(--emerald); }
+    .card h3 { margin: 4px 0 8px; font-size: 1.15rem; line-height: 1.3; }
+    .card p { color: var(--muted); font-size: 0.92rem; margin: 0 0 12px; }
+    .bullets { margin: 0 0 12px; padding-left: 18px; color: #cbd5e1; font-size: 0.87rem; }
     .bullets li { margin-bottom: 5px; }
-    footer { text-align: center; margin-top: 56px; color: var(--muted); font-size: 0.88rem; }
+    .book-flex { display: flex; gap: 18px; align-items: flex-start; }
+    .book-cover { width: 112px; flex-shrink: 0; border-radius: 8px; border: 1px solid #334155; box-shadow: 0 8px 20px rgba(0,0,0,0.45); }
+    .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 12px 0; }
+    .gallery img { width: 100%; border-radius: 8px; border: 1px solid #334155; }
+    .reader-box {
+      max-width: 780px;
+      margin: 24px auto;
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 16px;
+      padding: 36px 32px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.07rem;
+      line-height: 1.82;
+      color: #e2e8f0;
+    }
+    .reader-box h2, .reader-box h3 { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #fde68a; }
+    .reader-box blockquote { border-left: 3px solid var(--amber); margin: 16px 0; padding: 6px 16px; background: rgba(245,158,11,0.08); border-radius: 0 8px 8px 0; color: #fef3c7; }
+    .reader-box hr { border: none; border-top: 1px solid #334155; margin: 22px 0; }
+    audio { width: 100%; margin: 8px 0; border-radius: 8px; }
+    .fulfillment-note { font-size: 0.8rem; color: #94a3b8; border-top: 1px dashed #334155; padding-top: 8px; }
+    footer { text-align: center; margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.88rem; }
+    footer a { color: var(--cyan); text-decoration: none; }
   </style>
 </head>
 <body>
+  <nav class="topnav">
+    <div class="topnav-inner">
+      <a class="brand" href="https://michaelbrunet-bit.github.io/">MICHAEL BRUNET STUDIO</a>
+      <div class="navlinks">
+        <a href="https://michaelbrunet-bit.github.io/#games">Games &amp; Simulators</a>
+        <a href="https://michaelbrunet-bit.github.io/books/">Books &amp; Field Codex</a>
+        <a href="https://michaelbrunet-bit.github.io/#data-feeds">18 Apify B2B Feeds</a>
+        <a href="https://michaelbrunet-bit.github.io/#apis">FastAPI &amp; RAG</a>
+        <a href="https://michaelbrunet-bit.github.io/#systems">Open-Source Systems</a>
+      </div>
+    </div>
+  </nav>
   <div class="wrap">
-    <header>
-      <div class="eyebrow">NORAD 1983 VECTOR SIMULATOR • 2026 AI MICROSERVICES • GHOST-JOB FORENSICS</div>
-      <h1>Michael Brunet — Software &amp; AI Engineering Studio</h1>
+    <header class="hero">
+      <div class="eyebrow">INDIE SOFTWARE STUDIO • 18 LIVE DATA PIPELINES • ILLUSTRATED BOOKS</div>
+      <h1>Michael Brunet — Software, Data Feeds &amp; Independent Books</h1>
       <p class="hero-sub">
-        Creator of the open-source <strong>1983 WarGames W.O.P.R. Vector Simulator</strong>, the <strong>Stealth Job Fit &amp; Ghost-Job Forensics Extension</strong> for Indeed &amp; LinkedIn, and production-verified <strong>Python / FastAPI &amp; Hybrid RAG Microservices</strong>.
+        Hands-on software, <strong>free live browser games</strong>, <strong>18 production Apify B2B data extractors</strong>, <strong>pytest-verified Python/FastAPI &amp; FAISS RAG microservices</strong>, and <strong>illustrated survival &amp; fiction books</strong> with free online chapters.
       </p>
       <div class="hero-actions">
-        <a class="btn btn-cyan" href="https://michaelbrunet-bit.github.io/GTW-1983-WOPR-Simulator/" target="_blank">🕹️ Play 1983 W.O.P.R. Simulator Live</a>
-        <a class="btn btn-indigo" href="https://brunetmike.gumroad.com/l/uckkb" target="_blank">🕵️ Get Ghost-Job Forensics Extension ($29)</a>
-        <a class="btn btn-emerald" href="https://brunetmike.gumroad.com/l/hqenev" target="_blank">💎 7-in-1 Master Bundle ($149 — Save 54%)</a>
-        <a class="btn btn-outline" href="https://github.com/michaelbrunet-bit/GTW-1983-WOPR-Simulator" target="_blank">⭐ Star on GitHub</a>
+        <a class="btn btn-cyan" href="https://michaelbrunet-bit.github.io/arcana-tactics/">🔮 Play Arcana Tactics Live</a>
+        <a class="btn btn-outline" href="https://michaelbrunet-bit.github.io/GTW-1983-WOPR-Simulator/">🕹️ Play 1983 W.O.P.R. Simulator</a>
+        <a class="btn btn-amber" href="https://michaelbrunet-bit.github.io/books/">📚 Browse Books &amp; Free Chapters</a>
+        <a class="btn btn-emerald" href="https://brunetmike.gumroad.com/l/hqenev" target="_blank" rel="noopener">💎 7-in-1 Software Bundle ($149)</a>
       </div>
     </header>
 
-    <h2 class="section-title">🔥 Featured Releases &amp; Open-Source Simulators</h2>
-    <div class="grid">
+    <h2 class="section-title" id="games">🎮 Interactive Browser Games &amp; Retro Simulators (Play Free Now)</h2>
+    <p class="section-lead">Run directly inside your browser with zero install required.</p>
+    <div class="grid-2">
       <div class="card featured">
         <div>
           <div class="badge-row">
-            <span class="tag free">FREE OPEN-SOURCE (MIT)</span>
-            <span class="price">FREE</span>
+            <span class="tag free">LIVE IN BROWSER • TAROT RPG</span>
+            <span class="price">FREE / $6.99 Foil Pass</span>
           </div>
-          <h3>W.O.P.R. // Global Thermonuclear War (1983 Vector Simulator)</h3>
-          <p>Authentic tribute to the 1983 <em>WarGames</em> film featuring pure hollow HP 1345A glowing cyan vector continents on pitch-black #000000 CRT and procedural 300-baud Bell 103 modem audio.</p>
+          <h3>Arcana Tactics: Fate Weaver (78-Card Tarot Deckbuilder &amp; Divination Sanctum)</h3>
+          <p>Take the 7-question Soul Calibration Ritual to unlock Goth, Twilight, or Holy visual themes, conquer 4 tactical deckbuilder quests, and unlock the full 22 Major Arcana Grimoire &amp; Tarot Spread Sanctum.</p>
           <ul class="bullets">
-            <li><strong>🎬 1983 Movie Mode:</strong> IMSAI 8080 dial-in → Joshua → Las Vegas &amp; Seattle → CPE 1704 TKS → 0-Player Tic-Tac-Toe</li>
-            <li><strong>⚔️ Play The Game (Wargamer Mode):</strong> Command 24 Triad units (ICBM silos, stealth SSBNs, B-52/Tu-95 wings, ABMs) and win via C3I Decapitation</li>
+            <li>Plays smoothly in desktop or mobile browser with persistent save state</li>
+            <li>Optional $6.99 Supporter Foil Pass unlocks animated shaders &amp; full Arcana early</li>
           </ul>
         </div>
-        <div style="display:flex; gap:8px;">
-          <a class="btn btn-cyan" style="flex:1; justify-content:center;" href="https://michaelbrunet-bit.github.io/GTW-1983-WOPR-Simulator/" target="_blank">▶ Play in Browser</a>
-          <a class="btn btn-outline" style="flex:1; justify-content:center;" href="https://github.com/michaelbrunet-bit/GTW-1983-WOPR-Simulator" target="_blank">GitHub Repo</a>
-        </div>
+        <a class="btn btn-cyan" href="https://michaelbrunet-bit.github.io/arcana-tactics/">▶ Play Arcana Tactics Now (Live)</a>
       </div>
 
       <div class="card featured">
         <div>
           <div class="badge-row">
-            <span class="tag hot">CHROME &amp; EDGE EXTENSION (v2.2.0)</span>
-            <span class="price">$29</span>
+            <span class="tag free">OPEN-SOURCE (MIT) • WEB AUDIO CRT</span>
+            <span class="price">FREE</span>
           </div>
-          <h3>Stealth Job Fit &amp; Ghost-Job Forensics (Indeed &amp; LinkedIn)</h3>
-          <p>Stop wasting hours applying to stale, evergreen, or fake ghost job listings. Runs instant Ghost-Job Forensics &amp; Fit scoring directly on Indeed.com and LinkedIn.com.</p>
+          <h3>W.O.P.R. // Global Thermonuclear War (1983 Vector Simulator)</h3>
+          <p>Faithful 1983 <em>WarGames</em> tribute with glowing HP 1345A hollow cyan vector continents, procedural 300-baud Bell 103 modem audio, Movie Mode (<code>CPE 1704 TKS</code>), and 24-unit Wargamer Strategy Mode.</p>
           <ul class="bullets">
-            <li>Injects live on-card <strong>VERIFIED ACTIVE vs. HIGH GHOST RISK (0–100%)</strong> forensic badges</li>
-            <li>Evaluates requisition age, repost patterns, salary band disclosure &amp; talent-pool heuristics</li>
-            <li>Built-in anti-detect fingerprint &amp; WebRTC leak protection (<code>fingerprint.js</code>)</li>
+            <li>Switch cleanly between authentic 1983 cinema recreation &amp; playable strategic war</li>
           </ul>
         </div>
-        <a class="btn btn-indigo" style="justify-content:center;" href="https://brunetmike.gumroad.com/l/uckkb" target="_blank">Buy &amp; Download on Gumroad ($29) →</a>
+        <div style="display:flex; gap:8px;">
+          <a class="btn btn-cyan" style="flex:1;" href="https://michaelbrunet-bit.github.io/GTW-1983-WOPR-Simulator/">▶ Play in Browser</a>
+          <a class="btn btn-outline" style="flex:1;" href="https://github.com/michaelbrunet-bit/GTW-1983-WOPR-Simulator" target="_blank" rel="noopener">GitHub Repo</a>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-title" id="books">📚 Books, Survival Field Manuals &amp; Illustrated Storybooks</h2>
+    <p class="section-lead">Read Part I / Chapter 1 free right now, sample studio noir audio, or order DRM-free digital editions directly.</p>
+    <div class="grid-2">
+      <div class="card book-featured">
+        <div>
+          <div class="badge-row"><span class="tag hot">156 PAGES • 52 PLATES • 70 JURISDICTIONS</span><span class="price">$14.99</span></div>
+          <div class="book-flex">
+            <img class="book-cover" src="./books/assets/After_Zero_North_America_KDP_Kindle_Cover.jpg" alt="After Zero Book Cover" />
+            <div>
+              <h3>After Zero: North American Post-Collapse Survival &amp; Reconstruction Codex</h3>
+              <p>Complete reference for wild edibles vs. fatal lookalikes, trauma care, regional shelters, and off-grid craft across all 50 U.S. states, D.C., and 13 Canadian provinces/territories.</p>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <a class="btn btn-outline" style="flex:1;" href="https://michaelbrunet-bit.github.io/books/read-after-zero.html">📖 Read Part I Free</a>
+          <a class="btn btn-amber" style="flex:1;" href="https://michaelbrunet-bit.github.io/books/#after-zero">Details &amp; Plates →</a>
+        </div>
+      </div>
+
+      <div class="card book-featured">
+        <div>
+          <div class="badge-row"><span class="tag">SUPERNATURAL NOIR + AUDIO PREVIEW</span><span class="price">$4.99</span></div>
+          <div class="book-flex">
+            <img class="book-cover" src="./books/assets/Chronicles_of_Mike_Book1_Kindle_Cover_1600x2560_300dpi.jpg" alt="Chronicles of Mike Cover" />
+            <div>
+              <h3>The Chronicles of Mike: Book 1 — The Last Call Sessions</h3>
+              <p>Nine interconnected supernatural psychiatric case files starring ancient mythological figures and a quiet bartender at the edge of town. Includes narrated deep-noir studio audio preview.</p>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <a class="btn btn-outline" style="flex:1;" href="https://michaelbrunet-bit.github.io/books/read-chronicles-of-mike.html">🎧 Read &amp; Listen Free</a>
+          <a class="btn btn-indigo" style="flex:1;" href="https://michaelbrunet-bit.github.io/books/#chronicles-of-mike">Full Imprint →</a>
+        </div>
       </div>
 
       <div class="card">
         <div>
-          <div class="badge-row">
-            <span class="tag">INDIE DECKBUILDER RPG</span>
-            <span class="price">$5</span>
+          <div class="badge-row"><span class="tag free">LITERARY NOIR • CHAPTER 1 FREE</span><span class="price">$4.99</span></div>
+          <div class="book-flex">
+            <img class="book-cover" src="./books/assets/The_Quiet_One_Kronos_Kindle_Cover_1600x2560_300dpi.jpg" alt="Kronos Cover" />
+            <div>
+              <h3>The Quiet One at the End of the Bar (Kronos)</h3>
+              <p>Atmospheric Southern Gulf Coast drama set in Escambia County, Florida, about patience, community resilience, and seeing trajectories others miss.</p>
+            </div>
           </div>
-          <h3>Arcana Tactics: 78-Card Tarot Roguelike Deckbuilder</h3>
-          <p>Tactical 5x5 grid roguelike RPG featuring a complete 78-card Major &amp; Minor Arcana deck, Upright vs. Reversed card orientation mechanics, and elemental Suit synergies.</p>
-          <ul class="bullets">
-            <li>Upright &amp; Reversed tactical effects for every Major &amp; Minor Arcana card</li>
-            <li>Wands, Cups, Swords &amp; Pentacles elemental combos + Boss encounters</li>
-          </ul>
         </div>
-        <a class="btn btn-outline" style="justify-content:center;" href="https://michaelbrunet-bit.itch.io/arcana-tactics" target="_blank">Play on Itch.io →</a>
+        <a class="btn btn-outline" href="https://michaelbrunet-bit.github.io/books/read-kronos.html">📖 Read Chapter 1 Free Online →</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <div class="badge-row"><span class="tag green">KIDS SEL + PRINTABLE COLORING PACK</span><span class="price">$6.99 Pack</span></div>
+          <div class="book-flex">
+            <img class="book-cover" src="./books/assets/Avatar_of_Virtues_Vol1_Kindle_eBook_Cover_1600x2560_300dpi.jpg" alt="Avatar of Virtues Cover" />
+            <div>
+              <h3>Avatar of Virtues Vol. 1 &amp; Coloring Storybooks Mega Pack</h3>
+              <p>Heartwarming children's storybook on Honesty paired with 3 full 8.5x11 printable coloring storybooks (<em>Avatar of Virtues</em>, <em>The Eight Lanterns</em>, <em>The Eight Blossoms</em>).</p>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <a class="btn btn-outline" style="flex:1;" href="https://michaelbrunet-bit.github.io/books/read-avatar-of-virtues.html">📖 Read Story Free</a>
+          <a class="btn btn-emerald" style="flex:1;" href="https://michaelbrunet-bit.github.io/books/#avatar-of-virtues">Get 5-Book Pack ($6.99) →</a>
+        </div>
       </div>
     </div>
 
-    <h2 class="section-title">⚡ Production Python / FastAPI &amp; 2026 Hybrid RAG Microservices</h2>
+    <h2 class="section-title" id="data-feeds">📡 18 Live Cloud Data Pipelines &amp; $299/mo Done-For-You B2B Feeds</h2>
+    <p class="section-lead">Skip building scrapers or configuring dashboards—run my 18 public Pay-Per-Event Actors directly on Apify or request a weekly Done-For-You CSV/Google Sheet feed.</p>
     <div class="grid">
+      <div class="card">
+        <div>
+          <div class="badge-row"><span class="tag hot">RECRUITING &amp; STAFFING</span><span class="price">$299/mo DFY</span></div>
+          <h3>ATS Company Hiring Signals &amp; Tech Stacks</h3>
+          <p>Weekly CSV/Sheet tracking live engineering requisitions across Greenhouse, Ashby, and Lever boards via public Actor <code>Dagnabit/ats-company-hiring-signal-lead-enricher</code>.</p>
+        </div>
+        <a class="btn btn-cyan" href="mailto:michael.brunet@gmail.com?subject=Free%2025-Row%20Data%20Sample%20Request%20(ATS%20Hiring%20Signals)">Request Free 25-Row Sample →</a>
+      </div>
+      <div class="card">
+        <div>
+          <div class="badge-row"><span class="tag hot">COMMERCIAL CONTRACTORS</span><span class="price">$299/mo DFY</span></div>
+          <h3>High-Valuation Municipal Building Permits</h3>
+          <p>Fresh commercial roofing, solar, HVAC, and GC permit filings enriched from city open-data feeds (Austin, Seattle, Chicago) ready for immediate outreach.</p>
+        </div>
+        <a class="btn btn-cyan" href="mailto:michael.brunet@gmail.com?subject=Free%2025-Row%20Data%20Sample%20Request%20(Commercial%20Permits)">Request Free 25-Row Sample →</a>
+      </div>
+      <div class="card">
+        <div>
+          <div class="badge-row"><span class="tag free">18 PUBLIC ACTORS</span><span class="price">Pay-Per-Event</span></div>
+          <h3>Explore All 18 Verified Actors on Apify Store</h3>
+          <p>Schema-validated cloud Actors covering SaaS pricing diffs, SEC EDGAR signals, regulatory/healthcare registries, and job feeds—ready for cURL, Python, or MCP agents.</p>
+        </div>
+        <a class="btn btn-emerald" href="https://apify.com/dagnabit" target="_blank" rel="noopener">View Store on Apify (@Dagnabit) →</a>
+      </div>
+    </div>
+
+    <h2 class="section-title" id="apis">⚡ Chrome Extension &amp; Production Python / FastAPI Microservices</h2>
+    <p class="section-lead">Audited, clean-room FastAPI codebases with automated <code>pytest</code> suites, Dockerfiles, and modern 2026 LLM/RAG integration.</p>
+    <div class="grid">
+      <div class="card featured">
+        <div>
+          <div class="badge-row"><span class="tag hot">CHROME &amp; EDGE EXTENSION</span><span class="price">$29</span></div>
+          <h3>Stealth Job Fit &amp; Ghost-Job Forensics (Indeed &amp; LinkedIn)</h3>
+          <p>Spots stale/reposted ghost job requisitions directly inside search results using age, repost frequency, and salary disclosure forensics.</p>
+        </div>
+        <a class="btn btn-indigo" href="https://brunetmike.gumroad.com/l/uckkb" target="_blank" rel="noopener">Get Extension on Gumroad ($29) →</a>
+      </div>
       <div class="card">
         <div>
           <div class="badge-row"><span class="tag hot">2026 LLM + FAISS</span><span class="price">$49</span></div>
           <h3>Coding Knowledge Hybrid RAG Library Premium</h3>
-          <p>Local-first FAISS + sentence-transformers RAG engine with built-in similarity threshold guardrails and 2026 model support (<code>gemini-2.5-flash</code>, <code>gpt-4.1-mini</code>, <code>qwen3-coder-30b</code>).</p>
+          <p>Local FAISS + <code>sentence-transformers</code> vector retrieval paired with similarity guardrails and <code>gemini-2.5-flash</code> / <code>gpt-4.1-mini</code> / <code>qwen3-coder-30b</code>.</p>
         </div>
-        <a class="btn btn-emerald" style="justify-content:center;" href="https://brunetmike.gumroad.com/l/rzuiln" target="_blank">Get RAG Library ($49) →</a>
+        <a class="btn btn-emerald" href="https://brunetmike.gumroad.com/l/rzuiln" target="_blank" rel="noopener">Get RAG Library ($49) →</a>
       </div>
-
       <div class="card">
         <div>
           <div class="badge-row"><span class="tag">FASTAPI MICROSERVICE</span><span class="price">$69</span></div>
-          <h3>Cross-Domain Sentiment &amp; Source Credibility API</h3>
-          <p>Production FastAPI service combining aspect-level sentiment analysis with source credibility weighting, manipulation detection, and confidence scoring.</p>
+          <h3>Cross-Domain Sentiment &amp; Credibility Engine</h3>
+          <p>Aspect-level sentiment analysis combined with source-credibility weighting, manipulation scoring, and FastAPI REST endpoints.</p>
         </div>
-        <a class="btn btn-emerald" style="justify-content:center;" href="https://brunetmike.gumroad.com/l/ugtvbv" target="_blank">Get Sentiment &amp; Credibility API ($69) →</a>
+        <a class="btn btn-emerald" href="https://brunetmike.gumroad.com/l/ugtvbv" target="_blank" rel="noopener">Get Sentiment API ($69) →</a>
       </div>
-
       <div class="card">
         <div>
           <div class="badge-row"><span class="tag">FASTAPI MICROSERVICE</span><span class="price">$59</span></div>
-          <h3>Contact Enrichment &amp; Multi-Source Skip-Tracing API</h3>
-          <p>High-speed B2B contact enrichment, phone/email normalization, entity resolution, and skip-tracing confidence scoring microservice with full pytest suite.</p>
+          <h3>Contact Enrichment &amp; Skip-Tracing API</h3>
+          <p>Multi-source B2B contact normalization, entity resolution, and confidence-graded phone/email verification with tests.</p>
         </div>
-        <a class="btn btn-emerald" style="justify-content:center;" href="https://brunetmike.gumroad.com/l/qezac" target="_blank">Get Contact Enrichment API ($59) →</a>
+        <a class="btn btn-emerald" href="https://brunetmike.gumroad.com/l/qezac" target="_blank" rel="noopener">Get Enrichment API ($59) →</a>
       </div>
-
       <div class="card">
         <div>
           <div class="badge-row"><span class="tag">FASTAPI MICROSERVICE</span><span class="price">$49</span></div>
-          <h3>Real Estate Motivated-Seller Lead Generator API</h3>
-          <p>Automated property data aggregation, equity/distress scoring, and motivated-seller lead filtering REST API with RapidAPI &amp; API-key middleware.</p>
+          <h3>Real Estate Motivated-Seller Leads API</h3>
+          <p>Property signal aggregation and distress/equity scoring microservice with RapidAPI-ready API-key middleware.</p>
         </div>
-        <a class="btn btn-emerald" style="justify-content:center;" href="https://brunetmike.gumroad.com/l/uaewfq" target="_blank">Get Real Estate Leads API ($49) →</a>
+        <a class="btn btn-emerald" href="https://brunetmike.gumroad.com/l/uaewfq" target="_blank" rel="noopener">Get Real Estate API ($49) →</a>
       </div>
-
       <div class="card">
         <div>
-          <div class="badge-row"><span class="tag">FASTAPI MICROSERVICE</span><span class="price">$39</span></div>
-          <h3>Academic Papers Multi-Source Search API</h3>
-          <p>Unified REST API querying arXiv, PubMed, and Crossref with citation normalization, rate limiting, and structured JSON output for research pipelines.</p>
+          <div class="badge-row"><span class="tag">RESEARCH &amp; RETAIL APIS</span><span class="price">$29–$39</span></div>
+          <h3>Academic Papers &amp; E-Commerce Price Monitor APIs</h3>
+          <p>Unified arXiv/PubMed/Crossref research search (<code>$39</code>) and multi-retailer webhook price monitor (<code>$29</code>), or save 54% with the 7-in-1 Master Bundle.</p>
         </div>
-        <a class="btn btn-emerald" style="justify-content:center;" href="https://brunetmike.gumroad.com/l/qjdudp" target="_blank">Get Academic Papers API ($39) →</a>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <a class="btn btn-outline" style="flex:1;" href="https://brunetmike.gumroad.com/l/qjdudp" target="_blank" rel="noopener">Academic ($39)</a>
+          <a class="btn btn-outline" style="flex:1;" href="https://brunetmike.gumroad.com/l/wcsjlz" target="_blank" rel="noopener">Price Monitor ($29)</a>
+        </div>
       </div>
+    </div>
 
+    <h2 class="section-title" id="systems">🦀 Open-Source Systems Engineering</h2>
+    <div class="grid-2">
       <div class="card">
         <div>
-          <div class="badge-row"><span class="tag">FASTAPI MICROSERVICE</span><span class="price">$29</span></div>
-          <h3>E-Commerce Multi-Retailer Price Monitor API</h3>
-          <p>Turnkey price-tracking, historical delta calculation, and webhook alert FastAPI template with Docker deployment and automated tests.</p>
+          <div class="badge-row"><span class="tag free">7-CRATE RUST WORKSPACE</span><span class="price">MIT / Open Source</span></div>
+          <h3>OmniPOS Edge — Offline-First Rust Store Runtime</h3>
+          <p>Built across 7 Rust crates using <code>Axum</code>, embedded <code>redb</code> persistence, <code>wasmi</code> plugin sandbox, <code>ed25519-dalek</code> signing, and Tauri/React frontend architecture.</p>
         </div>
-        <a class="btn btn-emerald" style="justify-content:center;" href="https://brunetmike.gumroad.com/l/wcsjlz" target="_blank">Get Price Monitor API ($29) →</a>
+        <a class="btn btn-outline" href="https://github.com/michaelbrunet-bit/omnipos-edge-rust" target="_blank" rel="noopener">Inspect Rust Workspace on GitHub →</a>
+      </div>
+      <div class="card">
+        <div>
+          <div class="badge-row"><span class="tag free">FULL STOREFRONT</span><span class="price">Save 54%</span></div>
+          <h3>Complete 7-in-1 Software Master Bundle on Gumroad</h3>
+          <p>Bundle the Chrome Ghost-Job Forensics extension alongside the verified Python/FastAPI/FAISS RAG microservices in a single purchase.</p>
+        </div>
+        <a class="btn btn-emerald" href="https://brunetmike.gumroad.com/l/hqenev" target="_blank" rel="noopener">Unlock 7-in-1 Bundle ($149) →</a>
       </div>
     </div>
 
     <footer>
-      © 2026 Michael Brunet (<a href="https://github.com/michaelbrunet-bit" style="color:var(--cyan);">@michaelbrunet-bit</a>) •
-      <a href="https://brunetmike.gumroad.com" style="color:var(--cyan);">Gumroad Storefront</a> •
-      <a href="https://michaelbrunet-bit.itch.io" style="color:var(--cyan);">Itch.io Studio</a>
+      © 2026 Michael Brunet (<a href="https://github.com/michaelbrunet-bit">@michaelbrunet-bit</a>) • Pensacola, FL •
+      <a href="https://michaelbrunet-bit.github.io/books/">Book Imprint</a> •
+      <a href="https://michaelbrunet-bit.github.io/arcana-tactics/">Arcana Tactics</a> •
+      <a href="https://brunetmike.gumroad.com">Gumroad</a> •
+      <a href="https://apify.com/dagnabit">Apify</a>
     </footer>
   </div>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "ItemList", "name": "Michael Brunet Software, Games, Books & Data Pipelines", "itemListElement": [{"@type": "SoftwareApplication", "name": "W.O.P.R. // Global Thermonuclear War (1983 Vector Simulator)", "applicationCategory": "GameApplication", "operatingSystem": "Web Browser, Windows", "url": "https://michaelbrunet-bit.github.io/GTW-1983-WOPR-Simulator/"}, {"@type": "SoftwareApplication", "name": "Arcana Tactics: Fate Weaver", "applicationCategory": "GameApplication", "operatingSystem": "Web Browser", "url": "https://michaelbrunet-bit.github.io/arcana-tactics/"}, {"@type": "Book", "name": "After Zero: North American Post-Collapse Survival & Reconstruction Codex", "author": {"@type": "Person", "name": "Michael Brunet"}, "url": "https://michaelbrunet-bit.github.io/books/#after-zero"}, {"@type": "Book", "name": "The Chronicles of Mike: Book 1 \u2014 The Last Call Sessions", "author": {"@type": "Person", "name": "Michael Brunet"}, "url": "https://michaelbrunet-bit.github.io/books/#chronicles-of-mike"}]}</script>
 </body>
 </html>

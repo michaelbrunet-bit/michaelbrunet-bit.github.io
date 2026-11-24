@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arcana Tactics: Fate Weaver — Tarot RPG &amp; Divination Sanctum</title>
+  <link rel="stylesheet" href="./src/style.css?v=2.1" />
+</head>
+<body class="theme-twilight">
+  <div class="app-shell">
+    <!-- Top Header & Soul Alignment Bar -->
+    <header class="topbar">
+      <div class="brand-block">
+        <div class="brand-title">🔮 ARCANA TACTICS: FATE WEAVER</div>
+        <div class="brand-sub">
+          <span id="soul-archetype-badge">Soul Alignment: Uncalibrated</span>
+          <span class="sep">•</span>
+          <span id="collection-badge">Cards: 8 / 22</span>
+          <span class="sep">•</span>
+          <span id="pro-badge" style="color: #fbbf24; font-weight: 700;"></span>
+        </div>
+      </div>
+
+      <!-- Continuous Goth <-> Holy Spectrum Meter -->
+      <div class="alignment-meter-wrap" title="Personality Spectrum: Darker = More Goth Art | Lighter = More Holy Art">
+        <div class="alignment-labels">
+          <span>🦇 Goth (-100)</span>
+          <span id="alignment-score-label">0 (Twilight)</span>
+          <span>☀️ Holy (+100)</span>
+        </div>
+        <div class="alignment-track">
+          <div id="alignment-marker" class="alignment-marker" style="left: 50%;"></div>
+        </div>
+      </div>
+
+      <div class="top-actions">
+        <a href="https://michaelbrunet-bit.github.io/" class="btn-secondary" style="text-decoration: none;">← Studio Storefront</a>
+        <button id="btn-open-store" class="btn-primary">💎 Supporter Foil Pass ($6.99)</button>
+        <button id="btn-reset-save" class="btn-secondary" title="Reset Personality Test &amp; Campaign">↺ Retake Soul Test</button>
+      </div>
+    </header>
+
+    <!-- Main Mode Navigation Tabs -->
+    <nav class="mode-tabs">
+      <button class="tab-btn active" data-tab="personality">🪞 1. Personality &amp; Deck Art</button>
+      <button class="tab-btn" data-tab="quests">⚔️ 2. Personality Quests (<span id="nav-quest-progress">0/4</span>)</button>
+      <button class="tab-btn" data-tab="grimoire">📖 3. Arcana Grimoire (<span id="nav-card-count">8/22</span>)</button>
+      <button class="tab-btn" data-tab="reading" id="tab-btn-reading">🔮 4. Tarot Card Readings <span id="reading-lock-icon">🔒</span></button>
+    </nav>
+
+    <!-- Supporter DLC / PayPal Modal -->
+    <section id="pro-modal" class="modal-card hidden">
+      <div style="display: flex; justify-content: space-between; align-items: start; gap: 12px;">
+        <div>
+          <h3 style="margin: 0 0 6px; color: #fde68a;">💎 Celestial &amp; Abyssal Foil Supporter Pass ($6.99)</h3>
+          <p style="margin: 0 0 12px; font-size: 0.85rem; color: #cbd5e1;">
+            Supports indie Steam launch! Unlocks animated Foil Shaders across all Goth, Twilight &amp; Holy decks, +1 Max Astral Mana in Quest Battles, and instant access to all 22 Major Arcana &amp; the Tarot Reading Sanctum.
+          </p>
+        </div>
+        <button id="btn-close-store" class="btn-secondary">✕</button>
+      </div>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+        <a
+          href="https://www.paypal.com/paypalme/MichaelBrunet/6.99"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-primary"
+          style="text-decoration: none; display: inline-block;"
+        >
+          💳 Checkout via PayPal ($6.99)
+        </a>
+        <input
+          id="pro-key-input"
+          type="text"
+          value=""
+          placeholder="Enter PayPal Transaction ID (4+ chars) after checkout"
+          class="text-input"
+        />
+        <button id="btn-unlock-pro" class="btn-primary">Activate Pass</button>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- VIEW 1: PERSONALITY TEST & DECK COVER ART CONFIGURATOR                -->
+    <!-- ===================================================================== -->
+    <section id="view-personality" class="view-section">
+      <div class="personality-layout">
+        <!-- Left: Interactive Quiz or Completed Soul Summary -->
+        <div class="panel-card" id="quiz-container">
+          <div class="section-eyebrow">SOUL CALIBRATION RITUAL • INITIALIZING</div>
+          <h2 style="margin: 6px 0 8px;">Discover Your Deck Cover &amp; Soul Alignment</h2>
+          <p class="muted-text">Awakening the Oracle's 7-Question Personality Exam...</p>
+        </div>
+
+        <!-- Right: Live Deck Cover Art Preview -->
+        <div class="panel-card deck-preview-panel">
+          <div class="section-eyebrow">YOUR SOUL-FORGED DECK COVER ART</div>
+          <h3 id="deck-cover-title" style="margin: 4px 0;">The Astral Equilibrium</h3>
+          <div id="deck-cover-subtitle" class="muted-text" style="margin-bottom: 12px;">
+            Twilight Mystic Deck • Sun &amp; Moon Duality
+          </div>
+          <div class="deck-cover-frame">
+            <img id="deck-cover-img" src="./assets/decks/cover_twilight_eclipse.png" alt="Deck Cover Art" />
+          </div>
+          <div id="deck-passive-box" class="passive-pill"></div>
+          <p class="muted-text" style="font-size: 0.78rem; margin-top: 10px;">
+            The darker your answers, the more <strong>Goth</strong> your deck cover, card art, and quests become. The lighter your answers, the more <strong>Holy</strong> your sanctuary and card illustrations become.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- VIEW 2: PERSONALITY-BASED QUESTS & TACTICAL TAROT COMBAT              -->
+    <!-- ===================================================================== -->
+    <section id="view-quests" class="view-section hidden">
+      <!-- Stats strip for Quest Combat -->
+      <div class="stats-strip combat-stats-bar">
+        <div class="stat-pill">❤️ Vessel HP: <span id="stat-hp">80 / 80</span></div>
+        <div class="stat-pill">🛡️ Ward: <span id="stat-block">0</span></div>
+        <div class="stat-pill">⚡ Astral Mana: <span id="stat-mana">3 / 3</span></div>
+        <div class="stat-pill">🔮 Fate Points: <span id="stat-fate">2</span></div>
+        <div class="stat-pill">🪙 Astral Gold: <span id="stat-gold">50</span></div>
+      </div>
+
+      <!-- Quest Campaign Stepper -->
+      <div id="quest-stepper" class="quest-stepper"></div>
+
+      <!-- Narrative Dilemma Box (Before Battle) -->
+      <div id="quest-dilemma-box" class="panel-card dilemma-panel hidden"></div>
+
+      <!-- Active Tactical Battle Arena -->
+      <div id="quest-combat-arena" class="arena-grid">
+        <main>
+          <div class="boss-panel">
+            <div class="boss-header-row">
+              <div>
+                <div id="quest-chapter-tag" class="section-eyebrow">QUEST I</div>
+                <h2 id="enemy-name" style="margin: 4px 0; font-size: 1.5rem;"></h2>
+                <div id="enemy-title" class="muted-text"></div>
+              </div>
+              <div id="quest-reward-preview" class="reward-badge-box"></div>
+            </div>
+            <div class="hp-bar-outer">
+              <div id="enemy-hp-bar" class="hp-bar-inner" style="width: 100%;"></div>
+            </div>
+            <div id="enemy-hp" style="font-weight: 700; font-size: 0.9rem;"></div>
+            <div id="enemy-intent" style="margin-top: 8px; color: #fda4af; font-weight: 700;"></div>
+          </div>
+
+          <div id="hand-container" class="hand-grid"></div>
+        </main>
+
+        <aside class="sidebar-panel">
+          <div class="mini-deck-widget">
+            <img id="combat-deck-back" src="./assets/decks/cover_twilight_eclipse.png" alt="Deck Back" />
+            <div>
+              <div style="font-weight: 700; font-size: 0.85rem;" id="combat-deck-name">Active Deck</div>
+              <div class="muted-text" style="font-size: 0.75rem;">
+                Draw Pile: <span id="draw-pile-count">0</span> | Discard: <span id="discard-pile-count">0</span>
+              </div>
+            </div>
+          </div>
+
+          <button id="btn-end-turn" class="btn-secondary" style="width: 100%; font-size: 0.9rem; padding: 10px;">
+            ⏭️ Pass Turn &amp; Redraw Hand
+          </button>
+          <button id="btn-blessing" class="btn-sanctum">
+            🌟 Sanctum Blessing (40 🪙 → +18 HP, +2 🔮)
+          </button>
+          <div style="font-size: 0.8rem; font-weight: 700; color: #cbd5e1; margin-top: 4px;">
+            Astral Chronicle (Quest Log)
+          </div>
+          <div id="combat-log" class="log-box"></div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- VIEW 3: ARCANA GRIMOIRE (22 MAJOR ARCANA GALLERY)                     -->
+    <!-- ===================================================================== -->
+    <section id="view-grimoire" class="view-section hidden">
+      <div class="panel-card">
+        <div class="grimoire-header">
+          <div>
+            <div class="section-eyebrow">COMPLETE 22 MAJOR ARCANA CODEX</div>
+            <h2 style="margin: 4px 0;">Soul-Bound Grimoire &amp; Art Preview</h2>
+            <p class="muted-text" style="margin: 0;">
+              Cards automatically render in your personality's art style (<strong id="grimoire-style-label">Twilight</strong>), or preview all 3 styles below.
+            </p>
+          </div>
+          <div class="style-switcher">
+            <button class="btn-secondary" data-preview-style="auto">🪞 My Soul Style</button>
+            <button class="btn-secondary" data-preview-style="goth">🦇 Goth Art</button>
+            <button class="btn-secondary" data-preview-style="twilight">⚖️ Twilight Art</button>
+            <button class="btn-secondary" data-preview-style="holy">☀️ Holy Art</button>
+          </div>
+        </div>
+        <div id="grimoire-grid" class="grimoire-grid"></div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- VIEW 4: TAROT CARD READING SANCTUM (UNLOCKED AT END OF QUESTS)        -->
+    <!-- ===================================================================== -->
+    <section id="view-reading" class="view-section hidden">
+      <!-- Locked Banner if Quests not finished yet -->
+      <div id="reading-locked-panel" class="panel-card reading-locked-box hidden">
+        <h2>🔒 The Divination Sanctum Awaits Your Mastery</h2>
+        <p class="muted-text" style="max-width: 640px; margin: 8px auto 16px;">
+          True Tarot Card Readings require a complete 22-card Major Arcana deck forged through your Personality Quests. Complete all 4 Quests on your path to awaken the Divination Table!
+        </p>
+        <div id="reading-unlock-status" style="margin-bottom: 16px; font-weight: 700; color: #fde68a;"></div>
+        <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+          <button id="btn-go-quests" class="btn-primary">⚔️ Continue Personality Quests</button>
+          <button id="btn-Instant-unlock-reading" class="btn-secondary">
+            🗝️ Master Seeker Override (Unlock All 22 Cards &amp; Divination Now)
+          </button>
+        </div>
+      </div>
+
+      <!-- Unlocked Interactive Tarot Reading Table -->
+      <div id="reading-sanctum-content">
+        <div class="panel-card reading-controls-panel">
+          <div class="reading-top-row">
+            <div>
+              <div class="section-eyebrow">THE ORACLE'S DIVINATION TABLE • UNLOCKED</div>
+              <h2 style="margin: 4px 0;">Perform a Soul-Bound Tarot Card Reading</h2>
+              <p class="muted-text" style="margin: 0;">
+                Your readings use your <strong id="reading-deck-label">Soul Deck</strong> and synthesize esoteric interpretations aligned with your personality.
+              </p>
+            </div>
+            <img id="reading-deck-thumb" src="./assets/decks/cover_twilight_eclipse.png" alt="Deck Cover" class="reading-deck-mini" />
+          </div>
+
+          <div class="reading-form-grid">
+            <div>
+              <label class="field-label" for="reading-spread-select">1. Select Tarot Spread</label>
+              <select id="reading-spread-select" class="text-input" style="width: 100%;">
+                <option value="single">Single-Card Soul Mirror (1 Card)</option>
+                <option value="three_card" selected>Three-Card Fate Weaver — Past • Present • Future (3 Cards)</option>
+                <option value="five_card">Five-Card Sanctuary of the Soul Spread (5 Cards)</option>
+              </select>
+            </div>
+            <div>
+              <label class="field-label" for="reading-question-input">2. Whisper Your Question or Intention</label>
+              <input
+                id="reading-question-input"
+                type="text"
+                class="text-input"
+                style="width: 100%;"
+                placeholder="e.g., What hidden truth guides my next creative chapter?"
+              />
+            </div>
+            <div style="display: flex; align-items: end; gap: 8px;">
+              <button id="btn-deal-reading" class="btn-primary" style="width: 100%; padding: 11px 16px;">
+                🃏 Shuffle &amp; Deal Tarot Spread
+              </button>
+              <button id="btn-reveal-all-reading" class="btn-secondary" style="padding: 11px 14px;">
+                👁️ Reveal All
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Drawn Spread Cards Table -->
+        <div id="reading-spread-stage" class="reading-spread-stage"></div>
+
+        <!-- Holistic Oracle Synthesis Panel -->
+        <div id="reading-synthesis-panel" class="panel-card synthesis-panel hidden"></div>
+
+        <!-- Saved Readings Journal -->
+        <div class="panel-card" style="margin-top: 18px;">
+          <h3 style="margin: 0 0 10px;">📜 Saved Tarot Reading Chronicle</h3>
+          <div id="reading-journal-list" class="journal-list"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="./src/cards.js?v=2.2"></script>
+  <script src="./src/game.js?v=2.2"></script>
+</body>
+</html>
